@@ -1,0 +1,65 @@
+# Data Interchange Format
+
+# Strucktur definieren
+
+# dn=distinguished name gibt die absolute Position im LDAP Baum an
+dn: ou=groups,dc=springframework,dc=org
+objectclass: top
+objectclass: organizationalUnit
+ou: groups
+
+dn: ou=subgroups,ou=groups,dc=springframework,dc=org
+objectclass: top
+objectclass: organizationalUnit
+ou: subgroups
+
+dn: ou=user,dc=springframework,dc=org
+objectclass: top
+objectclass: organizationalUnit
+ou: user
+
+
+# Konkrete User anlegen mit SHA1 base64 verschluesselten Passwort
+
+dn: uid=christian,ou=user,dc=springframework,dc=org
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+cn: Christian
+sn: Zweitname
+uid: christian
+userPassword: {SHA}opz2ZfMX4+W8nV61LX1Id7iD1ZI=
+
+dn: uid=david,ou=user,dc=springframework,dc=org
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+cn: David
+uid: david
+userPassword: goetzinger
+
+dn: uid=dominik,ou=user,dc=springframework,dc=org
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+cn: Dominik
+uid: dominik
+userPassword: bork
+
+
+
+# Rollen definieren
+dn: cn=developers,ou=groups,dc=springframework,dc=org
+objectclass: top
+objectclass: groupOfNames
+cn: developers
+ou: developer
+uniqueMember: uid=christian,ou=user,dc=springframework,dc=org
+uniqueMember: uid=david,ou=user,dc=springframework,dc=org
+
+dn: cn=managers,ou=groups,dc=springframework,dc=org
+objectclass: top
+objectclass: groupOfNames
+cn: managers
+ou: manager
+uniqueMember: uid=dominik,ou=user,dc=springframework,dc=org
